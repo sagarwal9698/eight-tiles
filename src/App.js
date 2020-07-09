@@ -15,9 +15,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value1 : 1 ,  value2 : 2 , value3 : 3,
-      value4 : 4 ,  value5 : 5 , value6 : 6,
-      value7 : 7 ,  value8 : 8 , value0 : 0,
+      value : [0, 1, 2, 3, 4, 5, 6, 7, 8], index :9,
       status : "Click Start to begin the game."
     };
 
@@ -26,15 +24,87 @@ class App extends React.Component {
     ArrowKeysReact.config({
       left: () => {
         console.log('left key detected.');
+
+        // Index at which the command will not be accepted: 3,6,9
+
+        var i = this.state.index;
+
+        if(i === 3 || i=== 6 || i === 0){
+          this.setState({ status: "Invalid Move"});
+        }
+        else{
+          var temp = this.state.value;
+          var temp1 = temp[i];
+          temp[i] =  temp[i+1];
+          temp[i+1] = temp1;
+
+          this.setState({ value : temp,  index : i+1});
+
+
+        }
+
+
       },
       right: () => {
         console.log('right key detected.');
+        // Index at which the command will not be accepted: 1,4,7
+
+        var i = this.state.index;
+
+        if(i === 1 || i=== 4 || i === 7){
+          this.setState({ status: "Invalid Move"});
+        }
+        else{
+          var temp = this.state.value;
+          var temp1 = temp[i];
+          temp[i] =  temp[i-1];
+          temp[i-1] = temp1;
+
+          this.setState({ value : temp,  index : i-1});
+
+
+        }
       },
       up: () => {
         console.log('up key detected.');
+        // Index at which the command will not be accepted: 789
+        var i = this.state.index;
+
+
+        if(i === 1 || i=== 2 || i === 3){
+          this.setState({ status: "Invalid Move"});
+        }
+        else{
+          var temp = this.state.value;
+          var temp1 = temp[i];
+          temp[i] =  temp[i-3];
+          temp[i-3] = temp1;
+
+          this.setState({ value : temp,  index : i-3});
+
+
+        }
       },
       down: () => {
         console.log('down key detected.');
+        // Index at which the command will not be accepted: 123
+
+        var i = this.state.index;
+
+
+        if(i === 7 || i=== 8 || i === 0){
+          this.setState({ status: "Invalid Move"});
+        }
+        else{
+          var temp = this.state.value;
+          var temp1 = temp[i];
+          temp[i] =  temp[i+3];
+          temp[i+3] = temp1;
+
+          this.setState({ value : temp,  index : i+3});
+
+
+        }
       }
     });
   } 
@@ -59,9 +129,9 @@ class App extends React.Component {
 
   checkWin() {
 
-    const checkValue0 =  this.state.value0, checkValue1 = this.state.value1, checkValue2 = this.state.value2,
-    checkValue3 = this.state.value3, checkValue4 = this.state.value4, checkValue5 = this.state.value5,
-    checkValue6 = this.state.value6, checkValue7 = this.state.value7, checkValue8 = this.state.value8;
+    const checkValue0 =  this.state.value[0], checkValue1 = this.state.value[1], checkValue2 = this.state.value[2],
+    checkValue3 = this.state.value[3], checkValue4 = this.state.value[4], checkValue5 = this.state.value[5],
+    checkValue6 = this.state.value[6], checkValue7 = this.state.value[7], checkValue8 = this.state.value[8];
     
     this.handleStart();
 
@@ -83,13 +153,19 @@ class App extends React.Component {
     const collection = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     customShuffle(collection);
 
+    var i =0;
+
+    for(i =0; i<=8; i++){
+
+      if(collection[i] === 0){
+        this.setState({index : i});
+      }
+    }
+
     console.log(collection);
 
     this.setState({
-      value1: collection[1], value2: collection[2], value3: collection[3],
-      value4: collection[4], value5: collection[5], value6: collection[6],
-      value7: collection[7], value8: collection[8], value0: collection[0],
-      status: ' '
+      value : collection,   status: ' '
     });
   }
 
@@ -106,39 +182,39 @@ class App extends React.Component {
           <br></br>
           <Row>
             <Col sm={3}>
-              {this.state.value1}
+              {this.state.value[1]}
           </Col>
             <Col sm={3}>
-            {this.state.value2}
+            {this.state.value[2]}
           </Col>
             <Col sm={3}>
-            {this.state.value3}
-          </Col>
-          </Row>
-          <br></br>
-          <br></br>
-          <Row>
-            <Col sm={3}>
-            {this.state.value4}
-          </Col>
-            <Col sm={3}>
-            {this.state.value5}
-          </Col>
-            <Col sm={3}>
-            {this.state.value6}
+            {this.state.value[3]}
           </Col>
           </Row>
           <br></br>
           <br></br>
           <Row>
             <Col sm={3}>
-            {this.state.value7}
+            {this.state.value[4]}
           </Col>
             <Col sm={3}>
-            {this.state.value8}
+            {this.state.value[5]}
           </Col>
             <Col sm={3}>
-            {this.state.value0}
+            {this.state.value[6]}
+          </Col>
+          </Row>
+          <br></br>
+          <br></br>
+          <Row>
+            <Col sm={3}>
+            {this.state.value[7]}
+          </Col>
+            <Col sm={3}>
+            {this.state.value[8]}
+          </Col>
+            <Col sm={3}>
+            {this.state.value[0]}
           </Col>
           </Row>
         </Container>
@@ -148,7 +224,9 @@ class App extends React.Component {
         <button className="App-switch" onClick = {this.handleStart}>
           Start
         </button>
-        <p>{this.state.status}</p>
+        <p>{this.state.status}
+        {this.state.index}
+        </p>
       </div>
     );
 
