@@ -15,7 +15,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value : [0, 1, 2, 3, 4, 5, 6, 7, 8], index :9,
+      value : [1000, 1, 2, 3, 4, 5, 6, 7, 8, 0], index :9,
       status : "Click Start to begin the game."
     };
 
@@ -29,7 +29,7 @@ class App extends React.Component {
 
         var i = this.state.index;
 
-        if(i === 3 || i=== 6 || i === 0){
+        if(i === 3 || i=== 6 || i === 9){
           this.setState({ status: "Invalid Move"});
         }
         else{
@@ -92,7 +92,7 @@ class App extends React.Component {
         var i = this.state.index;
 
 
-        if(i === 7 || i=== 8 || i === 0){
+        if(i === 7 || i=== 8 || i === 9){
           this.setState({ status: "Invalid Move"});
         }
         else{
@@ -150,10 +150,19 @@ class App extends React.Component {
 
 
   handleStart() {
-    const collection = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    const collection = [1000, 1, 2, 3, 4, 5, 6, 7, 8, 0];
     customShuffle(collection);
 
     var i =0;
+
+    if( collection[0] !== 1000){
+      for(i =1; i<=9; i++){
+
+        if(collection[i] === 1000){
+          collection[i] = collection[0];
+        }
+      }
+    }
 
     for(i =0; i<=8; i++){
 
@@ -162,7 +171,7 @@ class App extends React.Component {
       }
     }
 
-    console.log(collection);
+    console.log(collection, i);
 
     this.setState({
       value : collection,   status: ' '
@@ -214,7 +223,7 @@ class App extends React.Component {
             {this.state.value[8]}
           </Col>
             <Col sm={3}>
-            {this.state.value[0]}
+            {this.state.value[9]}
           </Col>
           </Row>
         </Container>
