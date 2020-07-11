@@ -65,8 +65,8 @@ class App extends React.Component {
 
         }
       },
-      up: () => {
-        console.log('up key detected.');
+      down: () => {
+        console.log('down key detected.');
         // Index at which the command will not be accepted: 789
         var i = this.state.index;
 
@@ -85,8 +85,8 @@ class App extends React.Component {
 
         }
       },
-      down: () => {
-        console.log('down key detected.');
+      up: () => {
+        console.log('up key detected.');
         // Index at which the command will not be accepted: 123
 
         var i = this.state.index;
@@ -227,12 +227,14 @@ class App extends React.Component {
           </Col>
           </Row>
         </Container>
-        <button className="App-switch" onClick = {this.checkWin}>
-          Submit
-        </button>
+        <p className = "App-switchContainer">
         <button className="App-switch" onClick = {this.handleStart}>
           Start
         </button>
+        <button className="App-switch" onClick = {this.checkWin}>
+          Submit
+        </button>
+        </p>
         <p>{this.state.status}
         {this.state.index}
         </p>
