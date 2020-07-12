@@ -192,52 +192,53 @@ class App extends React.Component {
           <Row>
             <Col sm={3}>
               {this.state.value[1]}
-          </Col>
+            </Col>
             <Col sm={3}>
-            {this.state.value[2]}
-          </Col>
+              {this.state.value[2]}
+            </Col>
             <Col sm={3}>
-            {this.state.value[3]}
-          </Col>
+              {this.state.value[3]}
+            </Col>
           </Row>
           <br></br>
           <br></br>
           <Row>
             <Col sm={3}>
-            {this.state.value[4]}
-          </Col>
+              {this.state.value[4]}
+            </Col>
             <Col sm={3}>
-            {this.state.value[5]}
-          </Col>
+              {this.state.value[5]}
+            </Col>
             <Col sm={3}>
-            {this.state.value[6]}
-          </Col>
+              {this.state.value[6]}
+            </Col>
           </Row>
           <br></br>
           <br></br>
           <Row>
             <Col sm={3}>
-            {this.state.value[7]}
-          </Col>
+              {this.state.value[7]}
+            </Col>
             <Col sm={3}>
-            {this.state.value[8]}
-          </Col>
+              {this.state.value[8]}
+            </Col>
             <Col sm={3}>
-            {this.state.value[9]}
-          </Col>
+              {this.state.value[9]}
+            </Col>
           </Row>
+          <br></br>
+          <br></br>
         </Container>
-        <p className = "App-switchContainer">
-        <button className="App-switch" onClick = {this.handleStart}>
-          Start
-        </button>
-        <button className="App-switch" onClick = {this.checkWin}>
-          Submit
-        </button>
+        <p className="App-switchContainer">
+          <button className="App-switch" onClick={this.handleStart}>
+            Start
+          </button>
+
+          <button className="App-switch" onClick={this.checkWin}>
+            Submit
+          </button>
         </p>
-        <p>{this.state.status}
-        {this.state.index}
-        </p>
+        <p className="App-statusBar" >{this.state.status}</p>
       </div>
     );
 
